@@ -16,8 +16,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     console.log(error);
     res.sendStatus(500);
   })
-
-  res.sendStatus(200); // For testing only, can be removed
+// For testing only, can be removed
 });
 
 /**
