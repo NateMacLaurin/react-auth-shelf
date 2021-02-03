@@ -15,6 +15,14 @@ router.get('/', (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('/shelf POST route');
   console.log(req.body);
+  const queryText = `INSERT INTO  "item" ("description", "image_url", "user_id")
+  VALUES ($1, $2, $3);`;
+  pool.query(queryText, [req.body.newItem, req.body.newImgUrl, req.user.id])
+  .then((result) => {
+    res.sendStatus(200);
+  })
+
+
   // endpoint functionality
 });
 
