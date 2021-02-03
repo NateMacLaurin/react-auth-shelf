@@ -15,8 +15,22 @@ function* getItems(){
     }
 }
 
+function* deleteItem(action){
+    try{
+    //should send axios to DELETE single item from DB
+    console.log('in deleteItem saga')
+    yield axios.delte(`/api/shelf/${action.payload}`);
+    //send server response to reducer
+    yield put({type: 'GET_SHELF'})
+    }catch(error){
+        console.log(error)
+        alert('error getting items')
+    }
+}
+
 function* shelfSaga() {
     yield takeEvery('GET_SHELF', getItems);
+    yield takeEvery('DELETE_ITEM', deleteItem)
   }
 
   export default shelfSaga;
