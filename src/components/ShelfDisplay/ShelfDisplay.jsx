@@ -8,8 +8,9 @@ export default function ShelfDisplay() {
 
     const shelf = useSelector(store=>store.shelf)
 
-    const handleClick = () => {
+    const handleClick = (id) => {
         console.log('in delete')
+        dispatch({type: 'DELETE_ITEM', payload: id})
     }
 
     useEffect(()=>{
@@ -33,7 +34,7 @@ export default function ShelfDisplay() {
                         <tr key={item.id}>
                             <td>{item.description}</td>
                             <td>{item.image_url}</td>
-                            <td><button onClick={handleClick}>DELETE!</button></td>
+                            <td><button onClick={()=>handleClick(item.id)}>DELETE!</button></td>
                         </tr>
                     )})}
                 </tbody>

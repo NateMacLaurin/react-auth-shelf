@@ -8,7 +8,7 @@ const {rejectUnauthenticated} = require('../modules/authentication-middleware.js
  */
 //rejectUnauth is middleware to check for login/not login
 router.get('/', rejectUnauthenticated, (req, res) => {
-  const queryText = `SELECT * FROM "item"`
+  const queryText = `SELECT * FROM "item";`
   pool.query(queryText).then((response)=>{
     console.log(response);
     res.send(response.rows);
@@ -16,7 +16,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     console.log(error);
     res.sendStatus(500);
   })
-// For testing only, can be removed
 });
 
 /**
@@ -29,17 +28,17 @@ router.post('/', (req, res) => {
 /**
  * Delete an item if it's something the logged in user added
  */
-router.delete('/:id', rejectUnauthenticated, (req, res) => {
+router.delete('/delete/:id', rejectUnauthenticated, (req, res) => {
   // endpoint functionality
   const itemID = req.params.id;
   const queryText = `
-    DELETE FROM "items"
+    DELETE FROM "item"
     WHERE "id" = $1 AND "user_id" = $2
   `
   pool.query(queryText, [itemID, req.user.id])
   .then((response)=>{
     console.log(response);
-    res.sendStatus(203);
+    res.sendStatus(204);
   }).then((error)=>{
     console.log(error);
     res.sendStatus(403);
