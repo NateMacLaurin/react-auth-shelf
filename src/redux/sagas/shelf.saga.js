@@ -15,8 +15,8 @@ function* getItems(){
     }
 }
 
-function* itemSaga() {
+function* shelfSaga() {
     yield takeEvery('GET_SHELF', getItems);
   }
 
-  export default itemSaga;
+  export default shelfSaga;
