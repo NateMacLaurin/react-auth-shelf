@@ -1,5 +1,16 @@
 import axios from 'axios';
-import {put, takeEvery} from 'redux-saga/effects'
+import {put, takeEvery} from 'redux-saga/effects';
+
+
+function* postShelf(action){
+    try{
+        console.log(action);
+        yield axios.post('/api/shelf', action.payload)
+        yield put({type: 'GET_SHELF'})
+        } catch(err) {
+        console.error(err);
+          }
+      }
 
 function* getItems(){
     try{
@@ -17,6 +28,8 @@ function* getItems(){
 
 function* shelfSaga() {
     yield takeEvery('GET_SHELF', getItems);
+  yield takeEvery('POST_SHELF', postShelf);
   }
 
   export default shelfSaga;
+
