@@ -5,8 +5,7 @@ import {useSelector, useDispatch} from 'react-redux'
 export default function ShelfDisplay() {
 
     const dispatch = useDispatch();
-
-    const shelf = useSelector(store=>store.shelf)
+    const shelf = useSelector(store=>store.shelf);
 
     const handleClick = (id) => {
         console.log('in delete')
@@ -15,7 +14,7 @@ export default function ShelfDisplay() {
 
     useEffect(()=>{
         dispatch({type: 'GET_SHELF'})
-    }, [])
+    }, [dispatch])
 
     return (
         // api/shelf
